@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="nl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactief Concept: Referral Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: De applicatie is gestructureerd als een single-page-applicatie met een vaste navigatiebalk om de gebruiker soepel door de belangrijkste secties van het concept te leiden: 'Het Concept', 'De Gebruikers', 'Platform Tour' en 'De Gebruikersreis'. Deze opzet is gekozen om het tekstuele rapport om te zetten in een logische, interactieve verkenning. In plaats van passief lezen, kan de gebruiker de onderdelen actief ontdekken. Het hoogtepunt is de 'Platform Tour', die een interactief prototype van de dashboards toont, waardoor het abstracte concept tastbaar en begrijpelijk wordt. Dit bevordert een beter begrip en snellere feedback van stakeholders. -->
+    <!-- Visualization & Content Choices: De keuzes zijn gemaakt om engagement te maximaliseren. Info: Doelgroepen -> Goal: Vergelijken -> Viz: Twee-koloms interactieve kaarten -> Interactie: Hover om details (motivaties/behoeften) te tonen -> Justificatie: Maakt directe vergelijking tussen gebruikerstypes intuïtief. Info: Dashboard functies -> Goal: Informeren & Organiseren -> Viz: Getabde interface met interactieve tabellen en grafieken -> Interactie: Klikken op tabs om dashboards te wisselen, data filteren -> Justificatie: Simuleert de echte gebruikerservaring. Library: Chart.js voor grafieken. Info: User flow -> Goal: Proces tonen -> Viz: Visuele, genummerde tijdlijn -> Interactie: Klikken op stappen om details te markeren en te tonen -> Justificatie: Transformeert een lijst van stappen in een helder, volg-baar proces. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #4A4A4A;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .step-card.active {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: #D97706;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-amber-700">Referral Platform Concept</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#concept" class="text-gray-600 hover:text-amber-700 transition">Het Concept</a>
+                <a href="#users" class="text-gray-600 hover:text-amber-700 transition">De Gebruikers</a>
+                <a href="#tour" class="text-gray-600 hover:text-amber-700 transition">Platform Tour</a>
+                <a href="#flow" class="text-gray-600 hover:text-amber-700 transition">Gebruikersreis</a>
+            </div>
+            <div class="md:hidden">
+                <select id="mobile-nav" class="bg-white border border-gray-300 rounded-md py-1 px-2 text-gray-600">
+                    <option value="#concept">Het Concept</option>
+                    <option value="#users">De Gebruikers</option>
+                    <option value="#tour">Platform Tour</option>
+                    <option value="#flow">Gebruikersreis</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="concept" class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Een Krachtig Referral Platform</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600">
+                    Dit interactieve document visualiseert het concept voor een online referral platform, speciaal ontworpen om makelaars en hypotheekadviseurs te helpen een professioneel doorverwijzingsprogramma op te zetten, te beheren en te laten groeien.
+                </p>
+            </div>
+        </section>
+
+        <section id="users" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800">Twee Typen Verwijzers</h2>
+                    <p class="text-md text-gray-600 mt-2">Het succes van het platform hangt af van het begrijpen van de twee unieke gebruikersgroepen.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
+                        <h3 class="text-2xl font-bold text-amber-700 mb-4">Type A: Tevreden Klanten (Ambassadeurs)</h3>
+                        <p class="text-gray-600 mb-6">Klanten met een positieve ervaring die graag hun netwerk (familie, vrienden) helpen en daarvoor gewaardeerd worden.</p>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-lg text-gray-700">Motivatie</h4>
+                                <ul class="list-disc list-inside text-gray-600 mt-2">
+                                    <li>Kleine, tastbare beloningen (cadeaubon, geschenk)</li>
+                                    <li>Gevoel van erkenning en het helpen van vrienden</li>
+                                    <li>Korting op toekomstige diensten</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg text-gray-700">Behoeften</h4>
+                                <ul class="list-disc list-inside text-gray-600 mt-2">
+                                    <li>Extreem laagdrempelig en eenvoudig proces</li>
+                                    <li>Snelheid: geen lange formulieren</li>
+                                    <li>Directe transparantie over de status</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
+                        <h3 class="text-2xl font-bold text-amber-700 mb-4">Type B: Zakelijke Partners (Connectoren)</h3>
+                        <p class="text-gray-600 mb-6">Professionals uit aanverwante sectoren (accountants, notarissen) die structureel klanten kunnen doorverwijzen.</p>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-lg text-gray-700">Motivatie</h4>
+                                <ul class="list-disc list-inside text-gray-600 mt-2">
+                                    <li>Structurele, financiële commissie</li>
+                                    <li>Wederkerigheid in doorverwijzingen</li>
+                                    <li>Versterken van de professionele relatie</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg text-gray-700">Behoeften</h4>
+                                <ul class="list-disc list-inside text-gray-600 mt-2">
+                                    <li>Professionaliteit en betrouwbaarheid</li>
+                                    <li>Duidelijke rapportages en statistieken</li>
+                                    <li>Tijdige en correcte uitbetalingen</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tour" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800">Interactieve Platform Tour</h2>
+                    <p class="text-md text-gray-600 mt-2">Ervaar de belangrijkste omgevingen van het platform. Klik op de tabs om te wisselen.</p>
+                </div>
+                <div class="w-full max-w-5xl mx-auto">
+                    <div class="flex border-b border-gray-300 mb-8">
+                        <button id="tab-verwijzer" class="px-6 py-3 text-lg font-semibold border-b-2 border-amber-600 text-amber-700">Verwijzer Dashboard</button>
+                        <button id="tab-admin" class="px-6 py-3 text-lg font-semibold text-gray-500">Admin Dashboard</button>
+                    </div>
+
+                    <div id="content-verwijzer">
+                        <div class="bg-gray-50 p-8 rounded-lg shadow-inner border border-gray-200">
+                            <div class="flex justify-between items-start mb-8">
+                                <div>
+                                    <h3 class="text-2xl font-bold text-gray-800">Welkom, Anna!</h3>
+                                    <p class="text-gray-600">Dit is jouw persoonlijke referral dashboard.</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-semibold text-gray-700">Jouw unieke link:</p>
+                                    <div class="flex items-center mt-1">
+                                        <input type="text" value="https://makelaar.nl/r/anna01" class="border border-gray-300 rounded-l-md p-2 bg-gray-100 text-sm w-48" readonly>
+                                        <button class="bg-amber-600 text-white p-2 rounded-r-md hover:bg-amber-700 text-sm">Kopieer</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 text-center">
+                                <div class="bg-white p-4 rounded-lg shadow">
+                                    <p class="text-3xl font-bold text-amber-700">150</p>
+                                    <p class="text-sm text-gray-500">Kliks</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg shadow">
+                                    <p class="text-3xl font-bold text-amber-700">8</p>
+                                    <p class="text-sm text-gray-500">Leads</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg shadow">
+                                    <p class="text-3xl font-bold text-amber-700">2</p>
+                                    <p class="text-sm text-gray-500">Deals</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg shadow">
+                                    <p class="text-3xl font-bold text-green-600">€150</p>
+                                    <p class="text-sm text-gray-500">Verdiend</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-6 rounded-lg shadow mb-8">
+                                <h4 class="font-bold text-xl mb-4 text-gray-700">Jouw Prestaties (Laatste 6 Maanden)</h4>
+                                <div class="chart-container h-64 md:h-80">
+                                    <canvas id="verwijzerChart"></canvas>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="font-bold text-xl mb-4 text-gray-700">Mijn Doorverwijzingen</h4>
+                                <div class="bg-white rounded-lg shadow overflow-hidden">
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-left">
+                                            <thead class="bg-gray-100 border-b border-gray-200">
+                                                <tr>
+                                                    <th class="p-4 font-semibold">Naam Contact</th>
+                                                    <th class="p-4 font-semibold">Datum</th>
+                                                    <th class="p-4 font-semibold">Status</th>
+                                                    <th class="p-4 font-semibold">Beloning</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="referrals-table-body">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="content-admin" class="hidden">
+                        <div class="bg-gray-50 p-8 rounded-lg shadow-inner border border-gray-200">
+                             <div class="mb-8">
+                                <h3 class="text-2xl font-bold text-gray-800">Admin Dashboard</h3>
+                                <p class="text-gray-600">Overzicht van het gehele referral programma.</p>
+                            </div>
+                            <div class="grid lg:grid-cols-3 gap-8">
+                                <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow">
+                                    <h4 class="font-bold text-xl mb-4 text-gray-700">Programma Prestaties</h4>
+                                    <div class="chart-container h-80">
+                                        <canvas id="adminChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-6 rounded-lg shadow">
+                                    <h4 class="font-bold text-xl mb-4 text-gray-700">Top 5 Verwijzers</h4>
+                                    <ul class="space-y-4">
+                                        <li class="flex justify-between items-center">
+                                            <span>Notaris De Wit</span>
+                                            <span class="font-bold text-green-600">€1250</span>
+                                        </li>
+                                        <li class="flex justify-between items-center">
+                                            <span>Anna de Klant</span>
+                                            <span class="font-bold text-green-600">€150</span>
+                                        </li>
+                                        <li class="flex justify-between items-center">
+                                            <span>Bouwbedrijf Jansen</span>
+                                            <span class="font-bold text-green-600">€125</span>
+                                        </li>
+                                        <li class="flex justify-between items-center">
+                                            <span>Accountant Pieters</span>
+                                            <span class="font-bold text-green-600">€100</span>
+                                        </li>
+                                        <li class="flex justify-between items-center">
+                                            <span>Klant #4321</span>
+                                            <span class="font-bold text-green-600">€75</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="flow" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800">De Gebruikersreis</h2>
+                    <p class="text-md text-gray-600 mt-2">Volg de stappen van een succesvolle doorverwijzing, van uitnodiging tot beloning.</p>
+                </div>
+                <div id="user-flow-container" class="relative flex flex-col md:flex-row justify-center items-start gap-4 flex-wrap">
+                </div>
+                 <div id="user-flow-details" class="mt-8 max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg text-center transition-all duration-300">
+                    <p class="text-lg text-gray-700">Klik op een stap om de details te zien.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 - Visualisatie van Referral Platform Concept.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const referralData = [
+                { naam: 'Peter de Vries', datum: '15-09-2025', status: 'Deal Gesloten', beloning: '€ 75', icon: '⭐', color: 'text-green-600' },
+                { naam: 'Linda Janssen', datum: '12-09-2025', status: 'Afspraak gepland', beloning: 'In afw.', icon: '🗓️', color: 'text-blue-600' },
+                { naam: 'Mark de Groot', datum: '01-09-2025', status: 'Afgekeurd', beloning: '€ 0', icon: '🔴', color: 'text-red-600' },
+                { naam: 'Sophie Bakker', datum: '28-08-2025', status: 'In behandeling', beloning: 'In afw.', icon: '🔵', color: 'text-sky-600' },
+                { naam: 'Jan Willems', datum: '15-08-2025', status: 'Ontvangen', beloning: 'In afw.', icon: '🟢', color: 'text-teal-600' },
+                 { naam: 'Eva Pieters', datum: '01-07-2025', status: 'Deal Gesloten', beloning: '€ 75', icon: '⭐', color: 'text-green-600' },
+            ];
+
+            function renderTable(data) {
+                const tableBody = document.getElementById('referrals-table-body');
+                tableBody.innerHTML = '';
+                data.forEach(item => {
+                    const row = `
+                        <tr class="border-b border-gray-200 hover:bg-gray-50">
+                            <td class="p-4">${item.naam}</td>
+                            <td class="p-4 text-gray-600">${item.datum}</td>
+                            <td class="p-4 font-medium ${item.color}"><span class="mr-2">${item.icon}</span>${item.status}</td>
+                            <td class="p-4 font-semibold text-gray-800">${item.beloning}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            }
+
+            renderTable(referralData);
+
+            const userFlowSteps = [
+                { title: "Uitnodiging", description: "Een tevreden klant (Anna) ontvangt een geautomatiseerde e-mail na een succesvolle samenwerking: 'Blij met onze service? Deel het en ontvang een beloning!'" },
+                { title: "Registratie", description: "Anna klikt op de link, vult haar naam en e-mail in, en creëert een wachtwoord. Ze landt direct op haar persoonlijke dashboard." },
+                { title: "Ontdekking", description: "Een korte pop-up tour wijst haar op de unieke link, het statusoverzicht en de Promotie Hub." },
+                { title: "Actie", description: "Anna gaat naar de Promotie Hub en deelt een kant-en-klare WhatsApp-boodschap met haar broer, Peter." },
+                { title: "Conversie", description: "Peter klikt op de link en vult het contactformulier op de landingspagina van de makelaar in." },
+                { title: "Notificatie & Tracking", description: "Anna ontvangt een e-mail en ziet Peter op haar dashboard verschijnen met de status 'Ontvangen'." },
+                { title: "Voortgang", description: "De makelaar past de status aan. Anna ziet op haar dashboard dat de status is gewijzigd naar 'Afspraak gepland'." },
+                { title: "Succes", description: "Na twee maanden sluit Peter een deal. De status verandert naar 'Deal Gesloten' en de beloning wordt toegevoegd." },
+                { title: "Beloning", description: "De makelaar keurt de beloning goed. Anna ontvangt een e-mail met haar cadeaubon." }
+            ];
+
+            const flowContainer = document.getElementById('user-flow-container');
+            const flowDetails = document.getElementById('user-flow-details');
+            userFlowSteps.forEach((step, index) => {
+                const stepEl = document.createElement('div');
+                stepEl.className = 'step-card bg-white p-4 rounded-lg shadow-md border-2 border-transparent cursor-pointer transition-all duration-300 w-full md:w-64 flex items-center space-x-4';
+                stepEl.dataset.index = index;
+                stepEl.innerHTML = `
+                    <div class="flex-shrink-0 bg-amber-600 text-white rounded-full h-10 w-10 flex items-center justify-center font-bold text-lg">${index + 1}</div>
+                    <h4 class="font-semibold text-gray-700">${step.title}</h4>
+                `;
+                flowContainer.appendChild(stepEl);
+
+                stepEl.addEventListener('click', () => {
+                    document.querySelectorAll('.step-card').forEach(el => el.classList.remove('active'));
+                    stepEl.classList.add('active');
+                    flowDetails.innerHTML = `<p class="text-lg text-gray-700">${step.description}</p>`;
+                });
+            });
+
+            const tabVerwijzer = document.getElementById('tab-verwijzer');
+            const tabAdmin = document.getElementById('tab-admin');
+            const contentVerwijzer = document.getElementById('content-verwijzer');
+            const contentAdmin = document.getElementById('content-admin');
+
+            tabVerwijzer.addEventListener('click', () => {
+                contentVerwijzer.classList.remove('hidden');
+                contentAdmin.classList.add('hidden');
+                tabVerwijzer.classList.add('border-amber-600', 'text-amber-700');
+                tabVerwijzer.classList.remove('text-gray-500');
+                tabAdmin.classList.remove('border-amber-600', 'text-amber-700');
+                tabAdmin.classList.add('text-gray-500');
+            });
+
+            tabAdmin.addEventListener('click', () => {
+                contentAdmin.classList.remove('hidden');
+                contentVerwijzer.classList.add('hidden');
+                tabAdmin.classList.add('border-amber-600', 'text-amber-700');
+                tabAdmin.classList.remove('text-gray-500');
+                tabVerwijzer.classList.remove('border-amber-600', 'text-amber-700');
+                tabVerwijzer.classList.add('text-gray-500');
+            });
+
+            const mobileNav = document.getElementById('mobile-nav');
+            mobileNav.addEventListener('change', (e) => {
+                window.location.hash = e.target.value;
+            });
+            
+            const verwijzerCtx = document.getElementById('verwijzerChart').getContext('2d');
+            new Chart(verwijzerCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sep'],
+                    datasets: [{
+                        label: 'Aantal Leads',
+                        data: [1, 3, 2, 4, 5, 8],
+                        borderColor: 'rgba(217, 119, 6, 1)',
+                        backgroundColor: 'rgba(217, 119, 6, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+
+            const adminCtx = document.getElementById('adminChart').getContext('2d');
+            new Chart(adminCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sep'],
+                    datasets: [
+                        {
+                            label: 'Leads via Klanten',
+                            data: [10, 12, 15, 25, 30, 45],
+                            backgroundColor: 'rgba(217, 119, 6, 0.7)',
+                        },
+                        {
+                            label: 'Leads via Partners',
+                            data: [15, 18, 22, 28, 40, 55],
+                            backgroundColor: 'rgba(5, 150, 105, 0.7)',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } }
+                }
+            });
+
+        });
+    </script>
+
+</body>
+</html>
